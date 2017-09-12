@@ -1,0 +1,42 @@
+# linux
+linux
+安装CentOS 6.x操作系统后，开机时发现没有网络，最后发现系统启动时未激活网卡 - 因为只有在激活状态的网卡才能去连接网络，进行网络通讯。
+
+执行“ifconfig“命令发现只有lo网卡，并没有eth0。
+lo: flags=73<UP,LOOPBACK,RUNNING>  mtu 65536
+        inet 127.0.0.1  netmask 255.0.0.0
+        loop  txqueuelen 1  (Local Loopback)
+        RX packets 53404  bytes 12295751 (11.7 MiB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 53404  bytes 12295751 (11.7 MiB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+
+执行service network restart重启网络服务，发现命令提示中并没有开启eth0的提示。
+
+
+修改网卡配置文件“vi /etc/sysconfig/network-scripts/ifcfg-eth0“，将“ONBOOT=no”改为“ONBOOT=yes”，指明在系统启动时激活网卡，保存退出。
+
+
+重启网络服务，这时，命令提示中就会出现开启eth0的信息。
+eth0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
+        inet 172.17.214.37  netmask 255.255.240.0  broadcast 172.17.223.255
+        ether 00:16:3e:03:ec:62  txqueuelen 1000  (Ethernet)
+        RX packets 16407439  bytes 3187553009 (2.9 GiB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 95865826  bytes 8299737224 (7.7 GiB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+lo: flags=73<UP,LOOPBACK,RUNNING>  mtu 65536
+        inet 127.0.0.1  netmask 255.0.0.0
+        loop  txqueuelen 1  (Local Loopback)
+        RX packets 53414  bytes 12297269 (11.7 MiB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 53414  bytes 12297269 (11.7 MiB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+
+
+再次输入“ifconfig“命令检查一下，OK，大功告成。
+
+详情请见：http://blog.csdn.net/liang19890820/article/details/52108979
