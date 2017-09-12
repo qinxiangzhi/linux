@@ -1,0 +1,111 @@
+# linux
+linux
+
+1.使用绝对路径（以 / 开始），切换至指定目录
+
+[wang@localhost ~]$ pwd
+/home/wang
+[wang@localhost ~]$ cd /
+[wang@localhost /]$ pwd
+/
+[wang@localhost /]$ cd /home/
+[wang@localhost home]$ pwd
+/home
+
+
+2.使用相对路径，切换至指定目录
+
+[wang@localhost home]$ pwd
+/home
+[wang@localhost home]$ ls
+wang
+# 使用相对路径（相对于当前目录）
+[wang@localhost home]$ cd wang/
+[wang@localhost ~]$ pwd
+/home/wang
+
+
+3.切换至当前目录的上一级目录（用 .. 表示）
+
+[wang@localhost ~]$ pwd
+/home/wang
+[wang@localhost ~]$ cd ../
+[wang@localhost home]$ pwd
+/home
+[wang@localhost home]$ cd ../
+[wang@localhost /]$ pwd
+/
+
+
+后退至上上一级目录（用 ../../ 表示）
+
+[wang@localhost ~]$ pwd
+/home/wang
+[wang@localhost ~]$ cd ../../
+[wang@localhost /]$ pwd
+/
+
+
+从 /home/wang/test 目录切换至 /home/wang/title
+
+[wang@localhost ~]$ cd test/
+[wang@localhost test]$ pwd
+/home/wang/test
+# ../ 为上级目录，即：/home/wang
+[wang@localhost test]$ cd ../title/
+[wang@localhost title]$ pwd
+/home/wang/title
+
+
+4.切换工作目录到当前工作目录（木有什么意义！！！主要介绍 . 表示当前目录）
+
+[wang@localhost ~]$ pwd
+/home/wang
+[wang@localhost ~]$ cd ./
+[wang@localhost ~]$ pwd
+/home/wang
+
+
+5.使用 cd 或 cd ~ 进入当前用户主目录
+
+[wang@localhost /]$ pwd
+/
+[wang@localhost /]$ cd
+[wang@localhost ~]$ pwd
+/home/wang
+
+
+6.回到上次的目录（用 - 表示）
+
+[wang@localhost /]$ pwd
+/
+[wang@localhost /]$ cd -
+/home/wang
+[wang@localhost ~]$ pwd
+/home/wang
+[wang@localhost ~]$ cd -
+/
+
+
+7.切换至带有空格的目录
+
+[wang@localhost ~]$ cd test\ space/
+[wang@localhost test space]$ pwd
+/home/wang/test space
+
+
+或者（用单引号 ' 和双引号 " 均可）
+
+[wang@localhost ~]$ cd 'test space'/
+[wang@localhost test space]$ pwd
+/home/wang/test space
+
+
+8.从当前目录切换到以 t 开头的目录（忘了目录的名字，但又不想用 TAB 键）
+
+[wang@localhost ~]$ ls
+test  title
+[wang@localhost ~]$ cd t*
+[wang@localhost test]$ pwd
+/home/wang/test
+注意：如果只有一个目录以 t 开头，将会移动到该目录；如果有很多目录以 t 开头，将会移动到第一个以 t 开头的目录（按照字典里字母的顺序）。
